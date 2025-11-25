@@ -1,0 +1,16 @@
+{
+    "reviews": [
+        {
+            "text": "This game is amazing! Highly recommend to all chess lovers.",
+            "name": "Prish Keshari"
+        },
+        {
+            "text": "Best chess platform ever! The competition is fierce and fun.",
+            "name": "Uday Kumar"
+        },
+        {
+            "text": "Great Experience!",
+            "name": "Akshit Gupta"
+        }
+    ]
+}
