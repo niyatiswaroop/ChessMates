@@ -17,14 +17,13 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#">Home</a></li>
-                <li><a href="../index.php">Play</a></li>
+                <li><a href="/welcome/">Play</a></li>
                 <li><a href="#Learn">Learn</a></li>
                 <li><a href="#Community">Community</a></li>
-                <li><a href="#news">News</a></li>
             </ul>
             <div class="auth-buttons">
-                <a href="../signin/signinform.php" class="btn btn-signin">Sign In</a>
-                <a href="../signup/signuppage.php" class="btn btn-signup">Sign Up</a>
+                <a href="/signin/" class="btn btn-signin">Sign In</a>
+                <a href="/signup/" class="btn btn-signup">Sign Up</a>
             </div>
         </nav>
     </header>
@@ -34,7 +33,7 @@
             <div class="hero-content">
                 <h1>Master the Game of Chess</h1>
                 <p>Sharpen your skills, challenge global players, and become a chess master.</p>
-                <a href="../signin/signinform.php" class="btn btn-playnow">Play Now</a>
+                <a href="/welcome/" class="btn btn-playnow">Play Now</a>
             </div>
         </section>
 
@@ -83,7 +82,7 @@
             <img src="../img/prish.jpg" alt="Chess Player" class="testimonial-img">
         </section>
 
-        <section class="review-slider">
+        <section class="review-slider" id="reviews">
             <div class="slider-container">
                   <div class="slider" id="review-slider"></div>
             </div>
@@ -93,9 +92,9 @@
         <!-- Review Section hai-->
         <section class="add-review">
             <h2>Add Your Review</h2>
-            <form action="submit_review.php" method="POST" class="review-form">
-                <input type="text" name="review_name" placeholder="Enter your Name" class="text1" required>
-                <textarea name="review_text" placeholder="Add your Review " class="text1" required></textarea>
+            <form action="/api/reviews" method="POST" class="review-form">
+                <input type="text" name="review_name" placeholder="Enter your Name" class="text1" maxlength="60" required>
+                <textarea name="review_text" placeholder="Add your Review " class="text1" maxlength="500" required></textarea>
                 <button type="submit">Submit Review</button>
             </form>
         </section>
@@ -104,7 +103,7 @@
         <section class="featured" id="Learn">
             <div class="feature-box">
                 <h3>Play Chess</h3>
-                <p>Challenge friends or opponents in real-time games with instant matchmaking.</p>
+                <p>Challenge friends to real-time games: share a link and play from anywhere.</p>
             </div>
             <div class="feature-box overlap">
                 <a target="_blank" href="https://youtu.be/_eBxJWRHV48?si=aXlsuAwSoj_cePw3" style="text-decoration: none;">
@@ -135,18 +134,20 @@
     </footer>
 
     <script>
-    fetch('./reviews.json')
+    fetch('/api/reviews')
         .then(response => response.json())
         .then(data => {
             const slider = document.getElementById('review-slider');
             if (data.reviews.length > 0) {
                 data.reviews.forEach(review => {
+                    // textContent, not innerHTML: reviews are typed in by visitors
                     const slide = document.createElement('div');
                     slide.classList.add('slide');
-                    slide.innerHTML = `
-                        <p>"${review.text}"</p>
-                        <span>- ${review.name}</span>
-                    `;
+                    const text = document.createElement('p');
+                    text.textContent = `"${review.text}"`;
+                    const name = document.createElement('span');
+                    name.textContent = `- ${review.name}`;
+                    slide.append(text, name);
                     slider.appendChild(slide);
                 });
             } else {
@@ -155,30 +156,6 @@
             }
         })
         .catch(error => console.error('Error loading reviews:', error));
-
-    let currentSlideIndex = 0;
-    const slides = document.querySelectorAll('.slide');
-    const totalSlides = slides.length;
-
-    function showSlide(index) {
-        const slider = document.querySelector('.slider');
-        if (index >= totalSlides) {
-            currentSlideIndex = 0;
-        } else if (index < 0) {
-            currentSlideIndex = totalSlides - 1;
-        } else {
-            currentSlideIndex = index;
-        }
-        const offset = -currentSlideIndex * (slides[0].offsetWidth + 20); // 20px is the margin
-        slider.style.transform = `translateX(${offset}px)`;
-
-    }
-
-    
-
-    if (slides.length > 0) {
-        showSlide(currentSlideIndex);
-    }
 </script>
 </body>
 </html>

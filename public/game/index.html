@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Game</title>
+    <link rel="stylesheet" href="/lib/chessboardjs/css/chessboard-1.0.0.min.css">
+    <link rel="stylesheet" href="/game/game.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="sidebar">
+            <div class="player-info">
+                <!-- Top card: your opponent (or Black, when watching) -->
+                <div class="player" id="topPlayer">
+                    <img src="https://img.icons8.com/?size=100&id=kDoeg22e5jUY&format=png&color=000000" alt="" class="player-avatar">
+                    <h3 class="player-name"></h3>
+                    <p class="player-color"></p>
+                    <div class="clock">05:00</div>
+                </div>
+                <!-- Bottom card: you (or White, when watching) -->
+                <div class="player" id="bottomPlayer">
+                    <img src="https://img.icons8.com/?size=100&id=kDoeg22e5jUY&format=png&color=000000" alt="" class="player-avatar">
+                    <h3 class="player-name"></h3>
+                    <p class="player-color"></p>
+                    <div class="clock">05:00</div>
+                </div>
+            </div>
+            <div class="game-controls">
+                <button id="resignBtn" class="btn" hidden>Resign</button>
+                <button id="newGameBtn" class="btn">New Game</button>
+                <a href="/welcome/" class="btn">Back to Lobby</a>
+            </div>
+        </div>
+
+        <div class="board-column">
+            <div id="invite" class="invite" hidden>
+                <p>Send this link to your opponent. The game starts when they open it.</p>
+                <div class="invite-row">
+                    <input type="text" id="inviteLink" readonly>
+                    <button id="copyBtn" class="btn">Copy</button>
+                </div>
+            </div>
+            <div id="myBoard" class="chessboard-container"></div>
+            <p id="notice" class="notice" role="status"></p>
+        </div>
+
+        <div class="move-history">
+            <div id="gameStatus" class="game-status">
+                <p id="status">Connecting...</p>
+            </div>
+            <h4>Move History</h4>
+            <table id="moveHistoryTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>White</th>
+                        <th>Black</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Shown when a pawn reaches the last rank -->
+    <div id="promotion" class="promotion" hidden>
+        <div class="promotion-box">
+            <p>Promote to:</p>
+            <div id="promotionChoices" class="promotion-choices"></div>
+            <button id="promotionCancel" class="btn">Cancel</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+    <script src="/lib/chessboardjs/js/chessboard-1.0.0.min.js"></script>
+    <script src="/vendor/chess.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/game/game.js"></script>
+</body>
+</html>

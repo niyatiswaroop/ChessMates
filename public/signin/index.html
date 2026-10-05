@@ -12,19 +12,20 @@
             <img src="../img/chess.png" alt="Chess Logo" />
         </div>
         <h2>Login to CHESSMATES</h2>
-        <form id="loginForm" method="POST" action="signin.php">
+        <form id="loginForm" method="POST" action="/signin">
+            <input type="hidden" name="next" id="next">
             <div class="input-group">
-                <label for="username">EMAIL:</label>
-                <input type="text" id="email" name="email" required placeholder="Enter your EMAIL id">
+                <label for="email">EMAIL:</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your EMAIL id">
             </div>
             <div class="input-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required placeholder="Enter your password">
             </div>
-            <input type="submit" class="loginButton" name="signin">
+            <input type="submit" class="loginButton" value="Login">
             <p id="errorMessage" class="error-message"></p>
         </form>
-        <p class="signup-link">Don't have an account? <a href="../signup/signuppage.php">Sign Up</a></p>
+        <p class="signup-link">Don't have an account? <a id="signupLink" href="../signup/">Sign Up</a></p>
     </div>
 
     <script src="script2.js"></script>

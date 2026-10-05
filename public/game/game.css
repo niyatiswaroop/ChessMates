@@ -13,7 +13,6 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    overflow: hidden;
 }
 .game-container {
     width: 100%;
@@ -119,17 +118,149 @@ body {
     transform: scale(0.98);
 }
 
-#timer {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+.btn[hidden] {
+    display: none;
+}
+
+a.btn {
+    display: block;
+    text-align: center;
+}
+
+.player.to-move {
+    box-shadow: 0 0 0 2px #FFD700, 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.clock {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 6px 14px;
     font-size: 24px;
+    font-variant-numeric: tabular-nums;
+    color: #bbb;
+    background-color: #1f1f1f;
+    border-radius: 8px;
+}
+
+.clock.running {
     color: #fff;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: #0b6b2f;
+}
+
+.clock.low.running {
+    background-color: #a11d1d;
+}
+
+.board-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.board-column .chessboard-container {
+    margin-top: 0;
+}
+
+.invite {
+    width: 100%;
+    max-width: 500px;
+    padding: 15px;
+    background-color: #2d2d2d;
+    border: 1px solid #FFD700;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.invite[hidden] {
+    display: none;
+}
+
+.invite p {
+    margin-bottom: 10px;
+}
+
+.invite-row {
+    display: flex;
+    gap: 8px;
+}
+
+.invite-row input {
+    flex: 1;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 8px;
+    background-color: #1f1f1f;
+    color: #fff;
+}
+
+.invite-row .btn {
+    width: auto;
+    padding: 10px 20px;
+}
+
+.move-history {
+    max-height: calc(100vh - 40px);
+}
+
+.notice {
+    min-height: 1.2em;
+    color: #ff9f43;
+    text-align: center;
+}
+
+.promotion {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+}
+
+.promotion[hidden] {
+    display: none;
+}
+
+.promotion-box {
+    padding: 20px;
+    text-align: center;
+    background-color: #2d2d2d;
+    border-radius: 12px;
+}
+
+.promotion-choices {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.promotion-choices img {
+    width: 70px;
+    height: 70px;
+    padding: 5px;
+    cursor: pointer;
+    background-color: #f0d9b5;
+    border-radius: 8px;
+}
+
+.promotion-choices img:hover {
+    background-color: #FFD700;
+}
+
+@media (max-width: 900px) {
+    .game-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sidebar,
+    .move-history {
+        width: 100%;
+        max-width: 500px;
+    }
 }
 
 .move-history {

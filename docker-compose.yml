@@ -1,0 +1,30 @@
+services:
+  web:
+    build: .
+    command: npm run dev   # nodemon: restarts when a file under server/ changes
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules  # keep the image's node_modules, not the host's
+    environment:
+      DB_HOST: db
+      SESSION_SECRET: change-me-in-production
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: chess
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1"]
+      interval: 5s
+      retries: 20
+
+volumes:
+  db_data:
